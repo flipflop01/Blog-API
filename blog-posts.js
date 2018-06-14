@@ -36,7 +36,7 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', jsonParser, (req, res) => {
-	const requiredFields = ['title', 'content', 'author']; 
+	const requiredFields = ['id', 'title', 'content', 'author']; 
 	for (let i=0; i<requiredFields.length; i++) {
 		const field = requiredFields[i];
 		if (!(field in req.body)) {
@@ -46,17 +46,17 @@ router.put('/:id', jsonParser, (req, res) => {
 		}
 	}
 	if (req.params.id !== req.body.id) {
-		const message = (`Request path id (${req.params.id}) and Request body id `(${req.body.id})` must match`);
+		const message = (`Request path id (${req.params.id}) and Request body id ``(${req.body.id}) must match`);
 		console.error(message);
 		return res.status(400).send(message);
 	}
 	console.log(`Updating BlogPost \${req.params.id\``);
 		const updatedItem = BlogPosts.update({
-			id: req.params.idm 
+			id: req.params.id,
 			title: req.body.title,
 			content: req.body.content,
 			author: req.body.author,
-			publishDate: publishDate || Date.now()
+			publishDate: req.body.publishDate
 		});
 		res.status(204).end();
 })

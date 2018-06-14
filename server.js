@@ -3,7 +3,7 @@ const morgan = require('morgan');
 
 const app = express(); 
 
-const blogPostsRouter = require('/blog-posts');
+const blogPostsRouter = require('./blog-posts');
 
 app.use(morgan('common'));
 app.use(express.json());
